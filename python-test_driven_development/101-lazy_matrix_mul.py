@@ -26,6 +26,15 @@ def lazy_matrix_mul(m_a, m_b):
             f"shapes ({rows_b},{cols_b}) and ({rows_a},{cols_a}) not aligned: "
             f"{cols_b} (dim 1) != {rows_a} (dim 0)"
         )
+    for row in m_a:
+    for ele in row:
+        if not isinstance(ele, (int, float)):
+            raise TypeError("invalid data type for einsum")
+
+    for row in m_b:
+    for ele in row:
+        if not isinstance(ele, (int, float)):
+            raise TypeError("invalid data type for einsum")
     try:
         a = np.array(m_a)
         b = np.array(m_b)
