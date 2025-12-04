@@ -4,36 +4,39 @@ Multiplies two matrices
 """
 import numpy as np
 
-
 def lazy_matrix_mul(m_a, m_b):
     """Multiplies two matrices using NumPy."""
+    if not isinstance(m_a, list):
+        raise TypeError("m_a must be a list")
+    if not isinstance(m_b, list):
+        raise TypeError("m_b must be a list")
+    
+    if not all(isinstance(row, list) for row in m_a):
+        raise TypeError("m_a must be a list of lists")
+    if not all(isinstance(row, list) for row in m_b):
+        raise TypeError("m_b must be a list of lists")
+    
+    if len(m_a) == 0 or (len(m_a) == 1 and len(m_a[0]) == 0):
+        raise ValueError("m_a can't be empty")
+    if len(m_b) == 0 or (len(m_b) == 1 and len(m_b[0]) == 0):
+        raise ValueError("m_b can't be empty")
 
-    # scalar check
-    if not isinstance(m_a, list) or not isinstance(m_b, list):
-        raise TypeError("Scalar operands are not allowed, use '*' instead")
+    rows_a = len(m_a)
+    cols_a = len(m_a[0]) if m_a else 0
+    rows_b = len(m_b)
+    cols_b = len(m_b[0]) if m_b else 0
 
+    if cols_a != rows_b:
+        raise ValueError(
+            f"shapes ({rows_a},{cols_a}) and ({rows_b},{cols_b}) not aligned: "
+            f"{cols_a} (dim 1) != {rows_b} (dim 0)"
+        )
+    
     try:
         a = np.array(m_a)
         b = np.array(m_b)
-
-        # attempt multiplication
         return np.matmul(a, b)
-
     except ValueError as err:
-        # dimension mismatch: shapes info موجود داخل err
-        msg = str(err)
-        if "shapes" in msg:
-            raise ValueError(msg)
-        if "setting an array element with a sequence" in msg:
-            raise ValueError("setting an array element with a sequence.")
-        else:
-            raise ValueError(msg)
-
+        raise ValueError(str(err))
     except TypeError as err:
-        # wrong type inside matrix
-        msg = str(err)
-        if "data type" in msg or "numpy" in msg:
-            raise TypeError("invalid data type for einsum")
-        else:
-            raise TypeError(msg)
-
+        raise TypeError(str(err))
