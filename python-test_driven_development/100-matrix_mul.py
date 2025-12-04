@@ -28,10 +28,10 @@ def matrix_mul(m_a, m_b):
     """
 
     if not isinstance(m_a, list):
-        raise TypeError("m_a must be a list")
+        raise TypeError("Scalar operands are not allowed, use '*' instead")
 
     if not isinstance(m_b, list):
-        raise TypeError("m_b must be a list")
+        raise TypeError("Scalar operands are not allowed, use '*' instead")
 
     for elems in m_a:
         if not isinstance(elems, list):
