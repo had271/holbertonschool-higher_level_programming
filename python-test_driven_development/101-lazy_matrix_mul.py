@@ -5,15 +5,12 @@ Multiplies two matrices
 import numpy as np
 
 def lazy_matrix_mul(m_a, m_b):
-    """Multiplies two matrices using numpy"""
-
-    if not isinstance(m_a, list):
-        raise TypeError("Scalar operands are not allowed, use '*' instead")
-    if not isinstance(m_b, list):
-        raise TypeError("Scalar operands are not allowed, use '*' instead")
-
+    """Multiplies two matrices using NumPy."""
     try:
-        return (np.matmul(m_a, m_b))
-    except ValueError:
-        raise ValueError("m_a and m_b can't be multiplied")
-
+        a = np.array(m_a)
+        b = np.array(m_b)
+        return np.matmul(a, b).tolist()
+    except ValueError as err:
+        raise ValueError(err)
+    except TypeError as err:
+        raise TypeError(err)
