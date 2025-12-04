@@ -10,8 +10,22 @@ def lazy_matrix_mul(m_a, m_b):
         raise TypeError("Scalar operands are not allowed, use '*' instead")
     if not isinstance(m_b, list):
         raise TypeError("Scalar operands are not allowed, use '*' instead")
-    if len(m_a[0]) != len(m_b):
-        raise ValueError("shapes (1,0) and (2,2) not aligned: 0 (dim 1) != 2 (dim 0)")
+    rows_a = len(m_a)
+    cols_a = len(m_a[0])
+    rows_b = len(m_b)
+    cols_b = len(m_b[0])
+
+    if cols_a != rows_b:
+        raise ValueError(
+            f"shapes ({rows_a},{cols_a}) and ({rows_b},{cols_b}) not aligned: "
+            f"{cols_a} (dim 1) != {rows_b} (dim 0)"
+        )
+
+    if cols_b != rows_a:
+        raise ValueError(
+            f"shapes ({rows_b},{cols_b}) and ({rows_a},{cols_a}) not aligned: "
+            f"{cols_b} (dim 1) != {rows_a} (dim 0)"
+        )
     try:
         a = np.array(m_a)
         b = np.array(m_b)
