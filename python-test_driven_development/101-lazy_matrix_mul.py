@@ -1,14 +1,19 @@
 #!/usr/bin/python3
-"""Defines a matrix multiplication function using NumPy."""
+"""
+Multiplies two matrices
+"""
 import numpy as np
 
-
 def lazy_matrix_mul(m_a, m_b):
-    """Return the multiplication of two matrices.
+    """Multiplies two matrices using numpy"""
 
-    Args:
-        m_a (list of lists of ints/floats): The first matrix.
-        m_b (list of lists of ints/floats): The second matrix.
-    """
+    if not isinstance(m_a, list):
+        raise TypeError("Scalar operands are not allowed, use '*' instead")
+    if not isinstance(m_b, list):
+        raise TypeError("Scalar operands are not allowed, use '*' instead")
 
-    return (np.matmul(m_a, m_b))
+    try:
+        return np.matmul(m_a, m_b).tolist()
+    except ValueError:
+        raise ValueError("m_a and m_b can't be multiplied")
+
