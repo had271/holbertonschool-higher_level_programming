@@ -20,18 +20,22 @@ def lazy_matrix_mul(m_a, m_b):
         raise ValueError("m_a can't be empty")
     if len(m_b) == 0 or (len(m_b) == 1 and len(m_b[0]) == 0):
         raise ValueError("m_b can't be empty")
-
     rows_a = len(m_a)
-    cols_a = len(m_a[0]) if m_a else 0
+    cols_a = len(m_a[0])
     rows_b = len(m_b)
-    cols_b = len(m_b[0]) if m_b else 0
+    cols_b = len(m_b[0])
 
     if cols_a != rows_b:
         raise ValueError(
             f"shapes ({rows_a},{cols_a}) and ({rows_b},{cols_b}) not aligned: "
             f"{cols_a} (dim 1) != {rows_b} (dim 0)"
         )
-    
+
+    if cols_b != rows_a:
+        raise ValueError(
+            f"shapes ({rows_b},{cols_b}) and ({rows_a},{cols_a}) not aligned: "
+            f"{cols_b} (dim 1) != {rows_a} (dim 0)"
+        )
     try:
         a = np.array(m_a)
         b = np.array(m_b)
