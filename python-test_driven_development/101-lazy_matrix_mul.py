@@ -9,7 +9,7 @@ def lazy_matrix_mul(m_a, m_b):
     try:
         a = np.array(m_a)
         b = np.array(m_b)
-        return np.matmul(a, b).tolist()
+        return np.matmul(a, b)
     except ValueError as err:
         raise ValueError(err)
     except TypeError as err:
