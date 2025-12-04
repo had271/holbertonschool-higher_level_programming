@@ -6,6 +6,10 @@ import numpy as np
 
 def lazy_matrix_mul(m_a, m_b):
     """Multiplies two matrices using NumPy."""
+    if not isinstance(m_a, list):
+        raise TypeError("Scalar operands are not allowed, use '*' instead")
+    if not isinstance(m_b, list):
+        raise TypeError("Scalar operands are not allowed, use '*' instead")
     try:
         a = np.array(m_a)
         b = np.array(m_b)
