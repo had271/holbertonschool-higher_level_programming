@@ -2,4 +2,4 @@
 SELECT score, name
 FROM second_table
 GROUP BY 1
-ORDER BY score DESC
+ORDER BY score DESC;
