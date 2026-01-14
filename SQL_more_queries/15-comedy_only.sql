@@ -1,0 +1,7 @@
+-- Lists all Comedy shows in the database
+SELECT s.title
+FROM tv_shows AS s
+  INNER JOIN tv_show_genres AS t ON t.show_id = s.id
+  INNER JOIN tv_genres AS g ON g.id = t.gener_id 
+WHERE name = 'Comedy'
+ORDER BY title ASC;
