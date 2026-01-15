@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Lists all states from a MySQL database.
+''' Lists all states from a MySQL database.'''
 # Usage: ./1-filter_states.py <mysql username> \
 #                             <mysql password> \
 #                             <database name>
