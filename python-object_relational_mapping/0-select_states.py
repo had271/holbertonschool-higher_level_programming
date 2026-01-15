@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # Lists all states from a MySQL database.
-
+# Usage: ./1-filter_states.py <mysql username> \
+#                             <mysql password> \
+#                             <database name>
 import sys
 import MySQLdb
 
@@ -12,7 +14,7 @@ if __name__ == "__main__":
         passwd=sys.argv[2], 
         db=sys.argv[3])
     cur = db.cursor()
-    cur.execute("SELECT * FROM states ORDER BY states.id ASC")
+    cur.execute("SELECT * FROM states ORDER BY id ASC")
     [print(state) for state in cur.fetchall()]
     cur.close()
     db.close()
