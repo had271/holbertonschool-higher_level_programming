@@ -12,5 +12,5 @@ if __name__ == "__main__":
         passwd=sys.argv[2], 
         db=sys.argv[3])
     cur = db.cursor()
-    cur.execute("SELECT * FROM states ORDER BY id ASC")
-    [print(state) for state in c.fetchall() if state[1][0] == "N"]
+    cur.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
+    [print(state) for state in c.fetchall()
